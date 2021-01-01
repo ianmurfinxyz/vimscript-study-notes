@@ -1,0 +1,86 @@
+FILE: ~/study/vim/vimscript/chapter02/options
+AHUTOR: merlin - Ian Murfin - github.com/ianmurfinxyz
+
+(1) Setting Options
+
+Vim has 2 main kinds of options: boolean options and options which take a value. Do the values
+have types? So int, float, string values etc? Are they all strings?
+
+(2) Boolean options
+
+Each boolean option has a name, e.g. 'number' or 'wrap' and it is enabled/disabled with the 
+commands:
+
+':set <name>'     to enable.
+':set no<name>'   to disable.
+
+e.g.
+
+':set number' and ':set nonumber'
+
+Toggling boolean options can be done with '!' at the end of either of the set commands, e.g.
+
+:set number!
+:set nonumber!
+
+Q: Is the '!' simply a logical inverion operator like in C?
+
+(3) Querying current value of an option.
+
+You can ask vim the current value of an option by appending the '?', e.g.
+
+'set number?'
+
+it also works with the disable set command, i.e.
+
+'set nonumber?'
+
+both have the same effect.
+
+(4) Options with values.
+
+The above applies to options with values too except these options take a value seperated by an
+equals (operator?), e.g.
+
+'set numberwidth=10'
+
+note - whitespace is not accepted between the name, equals and value; results in a syntax error.
+
+Query example,
+
+'set numberwidth?'
+
+(4) You can set multiple options at once with the set command, e.g.
+
+'set number numberwidth=20'
+
+You can even query a value in the same command, e.g.
+
+'set number numberwidth=20 wrap?'
+
+(5) The Quotes
+
+At the end of chapter 2 the author asks you to lookup,
+
+':help 'number''
+
+with the single quotes around 'number'. This does result in a different help result than if you
+do,
+
+':help number'
+
+Why? Must be disambiguation but what? Are all single quoted helps options or something?
+
+(5) Relative line numbers.
+
+The option 'rnu' (or 'relativenumber' in the long form) changes the numbers to be relative to
+the cursor line. The number of the line with the cursor is the absolute line number. This could
+be really useful when coding as it would be much easier to copy many lines of text without having
+to calculate the number of lines I need.
+
+It can be quickly enabled with,
+
+':set rnu'
+
+It is a boolean option so can also be toggled.
+

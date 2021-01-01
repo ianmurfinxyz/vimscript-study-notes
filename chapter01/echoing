@@ -1,0 +1,41 @@
+ECHOING MESSAGES
+
+(1) Basic :echo
+
+Vim contains a built-in command line mode in which commands can be entered. These commands 
+are called 'ex' commands (vim derives from an old editor called ex).
+
+Vim has multiple built-in echo commands that all appear to echo to the vim command line. See
+':help echo' for the help docs.
+
+You can echo strings:
+
+:echo "hello kings and countrymen!"
+
+You can include new lines in the strings:
+
+:echo "hello\nkings\nand\ncountrymen!"
+
+note - the output of the command is wiped from the screen upon each redraw which often
+happens after vim has executed a sequence of commands. Vim may finish executing these commands
+after you have issued the echo resulting in the echo disappearing quickly from the screen (so
+vim executes commands asynchronously?). To prevent this you can force a redraw prior to the echo
+command as follows:
+
+:redraw | echo "hello world"
+
+Does the pipe mean OR? Does this have the same effect as in bash? So the second command will
+execute upon successful completion of the first? Do commands return codes to indicate success?
+
+(2) :echom[sg]
+
+The command :echomsg (or :echom for short) is different to :echo in that it saves the messages
+to the messages history (vim has one of those apparantly) allowing it to be viewed later. This
+is useful for debugging scripts apparantly (I guess it is like stdout debugging).
+
+(3) Useful :help searches
+
+:help echo
+:help echomsg
+:help messages
+

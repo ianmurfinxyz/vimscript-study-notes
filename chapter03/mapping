@@ -1,0 +1,42 @@
+FILE: ~/study/vim/vimscript/chapter03/mappings
+AUTHOR: merlin - Ian Murfin - github.com/ianmurfinxyz
+
+(1) MAPPINGS
+
+The :map command maps a key sequence {lhs} to another key sequence {lhs}. That is it. Its syntax
+is,
+
+:map {lhs} {rhs}
+
+e.g.
+
+:map - dd
+
+maps the {lhs} = '-' to the {rhs} = 'dd' meaning when you press the dash key vim will execute
+the sequence dd and delete the line under the cursor.
+
+Q: Can you map commands to key sequences? Maybe but seemingly not with the map command.
+
+Since vim is modal you can also map key sequences in specific modes, i.e. scope your maps to
+only apply in specific modes. This is done with the commands,
+
+:nmap {lhs} {rhs}     => for normal mode
+:vmap {lhs} {rhs}     => for visual mode
+:imap {lhs} {rhs}     => for insert mode
+
+and so on. See ':help map' for a full list of modes and lots more info.
+
+(2) UNMAPPING
+
+The :unmap command removes a map you have created. Once again it can be used with modes so you
+also have,
+
+:unmap {lhs}
+:nunmap {lhs}     => for normal mode
+:vunmap {lhs}     => for normal mode
+:iunmap {lhs}     => for normal mode
+
+(3) SHORTHANDS
+
+Like most vim commands the map commands have shorthands, e.g. the ':unmap' command short hand is
+':unm'.
