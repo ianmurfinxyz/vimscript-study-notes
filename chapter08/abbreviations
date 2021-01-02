@@ -1,0 +1,60 @@
+--------------------------------------------------------------------------------
+FILE: ~/study/vim/vimscript/chapter08/abbreviations
+AUTHOR: merlin - Ian Murfin - github.com/ianmurfinxyz
+--------------------------------------------------------------------------------
+
+-- [0]  Abbreviations --
+
+This is actually a really useful feature I could of done with knowing about sooner.
+Basically it is a mapping in which extra rules apply as to when the mapping is 
+activated because the intended use cases differ between mappings and abbreviations.
+
+A mapping runs any key sequence in response to the entry of another mapped key
+sequence. The mapping will always run when the key sequence is entered irrespective
+of what keys are pressed before or after the mapping.
+
+An abbreviation will run a key sequence in response to the entry of another but the
+abbreviation will only run if:
+
+1) you type a non-keyword character after the key sequence, with keyword characters
+   being set via the a 'keyword' option/command (need to find how to do this). The 
+   current keywords can be viewed with the :isKeyword? command.
+
+   e.g. if you setup the abbreviation,
+
+   :iabbrev hppy happy
+
+   then when you type 'hppy' and then enter a non-keyword char the abbreviation will
+   activate and substitute 'hppy' with 'happy'.
+
+   By default keyword characters include:
+
+   - all alphabet chars, upper and lowercase
+   - all numbers
+   - underscore
+   - ascii chars 192-255, which are special chars (see the ascii table).
+
+   Thus typing any char other than those will active an abbreviation.
+
+   note: In the ':help iskeyword' doc it mentions an alternate set of keywords that are
+   useful for C programs, a set which include some common operators like '*' etc. This
+   set would prevent abbreviations from triggering upon use of these extra chars which
+   may be useful when writing C. Should check that out.
+
+2) you typed a non-keyword before the keysequence (I think), i.e. if you type a keyword
+   char prior to the sequence the abbrev will not trigger.
+
+This feature could be really useful to make it easier to add common snippets of code, 
+like class blocks with an abbreviation like,
+
+:iabbrev --class class<cr>{<cr>public:<cr>private:<cr>};<cr>
+
+which would output a class block when you enter --class.
+
+Could add abbreviations to enter code dividing blocks like,
+
+//----------------------------------------------------------------------------//
+//                                                                            //
+//----------------------------------------------------------------------------//
+
+with just a few key presses. Could save lots of time with these.

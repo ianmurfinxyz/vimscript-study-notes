@@ -1,0 +1,42 @@
+--------------------------------------------------------------------------------
+FILE: ~/study/vim/vimscript/chapter05/strict_mapping
+AUTHOR: merlin - Ian Murfin - github.com/ianmurfinxyz
+--------------------------------------------------------------------------------
+
+-- [0] Recursive Mappings --
+
+All vim mappings made with a *map command are recursive, meaning that any key
+sequence in the {rhs} that has been mapped (changed away from its default) will
+invoke the new mapped key sequence, not the default.
+
+For example, the commands,
+
+:map dd x
+:map - dd
+
+will result in the '-' key deleting a single character (i.e. running x) no a line.
+The '-' runs dd which itself has been remapped to x.
+
+This acts recursively which can lead to infinite recursions, like the following 
+example given in chapter 05 of the source book,
+
+:nmap dd O<esc>jddk
+
+This is an infinite recursive map because the {lhs} and {rhs} both contain the
+same key sequence, thus the mapping is invoked in its own {rhs} leading to and
+inifinite recursion.
+
+-- [1] Non-Recursive Mappings --
+
+All the *map commands have non-recursive equivilents in which the key sequence in
+the {rhs} always invokes the default mappings, never any user defined mappings
+ensuring recursion cannot happen.
+
+These equivilents are all commands of the form *noremap, i.e. they have 'nore'
+before the 'map' bit in the command. The prefixes for modes are the same, e.g.
+
+imap  -->  inoremap     for the non-recursive form
+nmap  -->  nnoremap
+vmap  -->  vnoremap
+
+these are documented at ':help map'.

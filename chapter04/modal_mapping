@@ -1,0 +1,43 @@
+--------------------------------------------------------------------------------
+FILE: ~/study/vim/vimscript/chapter04/modal_mapping
+AUTHOR: merlin - Ian Murfin - github.com/ianmurfinxyz
+--------------------------------------------------------------------------------
+
+-- [0] A few simple mappings --
+
+note: remember the <c-<key>> form of mappings allow you to map to a control modifier
+key press, e.g. {lhs}=<c-d> maps the {rhs} to the key press Control+d.
+
+<esc> represents the escape key in the mapping key sequences. It can be used to switch
+modes in a mapping (since escape exits the current mode going back to normal mode), e.g.
+
+:imap <c-d> <esc>ddi
+
+=> maps Control+d in insert mode to the sequence which (1) escapes to normal mode, (2) deletes
+the current line under the cursor, (3) returns to insert mode.
+
+-- [1] The excersize solutions --
+
+note: these excersizes can have multiple solutions as in vim there is more than one way to skin
+a cat.
+
+[i] Uppercase word in insert mode.
+
+{lhs}=<c-u> {rhs}=<esc>gUiwi     => converts the current word to uppercase when in insert mode.
+
+      or
+
+{lhs}=<c-u> {rhs}=<esc>viwUi
+
+The above mapping does however result in the cursor being at the start of the word being upper-
+cased, can move the cursor to the end to continue typing in insert mode with the mapping,
+
+{lhs}=<c-u> {rhs}=<esc>viwUea
+
+note: don't forget to map it with :imap not :map so the mapping applies to insert mode not 
+normal mode (I made that mistake when testing).
+
+[ii] Uppercase word in normal mode.
+
+{lhs}=<c-u> {rhs}=gUiw
+

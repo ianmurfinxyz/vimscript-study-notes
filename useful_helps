@@ -1,0 +1,3 @@
+" key notation lists all the key codes that can be used in maps and abbreviations
+" like <BS> and <cr> etc.
+:help key-notation

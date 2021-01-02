@@ -1,0 +1,43 @@
+--------------------------------------------------------------------------------
+FILE: ~/study/vim/vimscript/chapter06/leaders
+AUTHOR: merlin - Ian Murfin - github.com/ianmurfinxyz
+--------------------------------------------------------------------------------
+
+-- [0] The 'Leader' key in mappings --
+
+To expand the number of keys which can be mapped to custom sequences and to avoid
+having to overwrite the default mappings of keys you can use a leader key in which
+the leader key sort-of acts like a switch into a different mode.
+
+You could introduce your own leader key by simply prefixing all your custome mappings
+with the same key, e.g.
+
+:map -d dd
+:map -u guiw
+:map -U gUiw
+
+and so on.
+
+But vim directly supports this concept allowing you to define a leader key with the
+command:
+
+:let mapleader="<your_key>"
+
+e.g.
+
+:let mapleader="-"
+
+you can then use the tag <leader> in your sequence mappings, e.g.
+
+:map <leader>d dd
+:map <leader>u guiw
+:map <leader>U gUiw
+
+and so on.
+
+-- [1] The 'Local Leader' key in mappings --
+
+The local leader is a leader key for specific types of files, allowing you to have custom
+(different) leader keys for different file types, e.g. C source, python source etc.
+
+reminder: I should use the *noremap versions of the map command.
