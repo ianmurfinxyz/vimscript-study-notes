@@ -1,0 +1,87 @@
+--------------------------------------------------------------------------------
+FILE: ~/study/vim/vimscript/chapter19/variables
+AUTHOR: merlin - Ian Murfin - github.com/ianmurfinxyz
+SOURCES: 
+  [i] https://learnvimscriptthehardway.stevelosh.com/chapters/19.html
+  [ii] https://stackoverflow.com/questions/1517582/what-is-the-difference-between-statically-typed-and-dynamically-typed-languages
+--------------------------------------------------------------------------------
+
+-- [0] Basics --
+
+Variables are declared with the let command.
+
+  ** from ':help let' **********************************
+
+  :let {var-name} = {expr1}				*:let* *E18*
+
+  Set internal variable {var-name} to the result of the
+  expression {expr1}.  The variable will get the type
+  from the {expr}.  If {var-name} didn't exist yet, it
+  is created.
+
+  ******************************************************
+
+Q: what types can variables have?
+
+note: the help description implies variables have types.
+
+The following is an example assignment:
+
+:let name = "harry"     => creates a new var called 'name' with a string value.
+:let age = 20           => creates a new var called 'age' with an int value.
+
+Q: Can variables be reassigned? 
+A: Testing shows yes. (run: [i] :let age=20 [ii] :let age=30 [iii] :echo age)
+
+Q: Can variables be reasigned values of different types? 
+A: Testing shows yes. (run [i] :let age="harry" [ii] :let age=20 [iii] :echo age)
+
+note: Source [i] states vimscript is not dynamically typed even though variables
+can be reassigned values of different types without any casting or errors. See
+source [ii] for a discussion on the difference between static and dynamic typing
+for a refresher.
+
+-- [1] Options Vs Variables --
+
+Vim options such as 'wrap' and 'textwidth' are NOT variables but neither are their
+names reserved keywords. Thus you can create variables with the same names that 
+shadow the options.
+
+WARNING!! Dont get confused between the :let and :set commands. The former creates
+variables and assigns them, the latter sets options (assigns them). Running,
+  :set name="harry"    => results in the error msg: "E581: Unkown Option: name="
+and
+  :let textwidth=20    => results in no error but it creates a variables called 
+                          'textwidth' with the int value 20. It does NOT change 
+                          the options and does NOT result in any error or warning.
+
+Thus the options and variables are completely seperate systems. However you can get
+the values of options and output them with the :echo command, e.g.
+  :echo &textwidth
+  :echo &wrap
+  
+Boolean options have boolean values represented as integers (0==false and 1==true).
+
+Hence note that options are typed like variables.
+
+note: so far it is clear that vimscript has the fundamental types: integer, boolean 
+and string atleast. Does it have float or objects etc?
+
+note: vimscript treats any non-zero integer as being truthy. Q: How about strings?
+
+WAIT!! The ampersand! So the ampersand as a prefix is actually the thing which 
+distinguishes an option from a variable in vimscript, or atleast it can be. You
+can actually use the let command with options (to assign them) if you prefix the
+name with an ampersand, e.g.
+  :let &textwidth=20
+Is there any reason to do this though? If not it may be better to use :let for
+variables and :set for options. 
+   |
+   |
+   V
+Spoke too soon. The very next line I read of source [i] states that the set command
+only supports assignment of literal values to options, whereas the let command allows
+expressions such as x=x+10 with options. Thus as an example you can do:
+  :let &textwidth=&textwidth+20
+where we are using the ampersand to refer to the option (not any variable of the same
+name).
