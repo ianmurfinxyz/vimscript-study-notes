@@ -3,7 +3,7 @@ AUTHOR: merlin - Ian Murfin - github.com/ianmurfinxyz
 
 (1) MAPPINGS
 
-The :map command maps a key sequence {lhs} to another key sequence {lhs}. That is it. Its syntax
+The :map command maps a key sequence {lhs} to another key sequence {rhs}. That is it. Its syntax
 is,
 
 :map {lhs} {rhs}
